@@ -1,6 +1,7 @@
 <template>
-  <div class="home">
-    
+ 
+ <div class="home">
+
     <div>
       <h1>{{ restaurant.name }}</h1>
       <h1>{{ restaurant.address }}</h1>
@@ -66,10 +67,13 @@
 import axios from 'axios';
 import VueCookies from 'vue-cookies';
 
+import myHeader from "../components/MyHeader.vue"
+
 export default {
   name: 'RestaurantDashboard',
   components: {
    // HelloWorld
+   "my-header": myHeader
   },
 
   data: function() {

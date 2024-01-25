@@ -1,27 +1,39 @@
 <template>
-  <div class="clientsignup">
-       <h3>Client Sign Up</h3>
-    <form v-on:submit.prevent="signupClients">
+  <div class="patientsignup">
+       <h3>Patient Sign Up</h3>
+    <form v-on:submit.prevent="signupPatient">
 
-        <label>Email</label>
-        <input v-model="email" type="text"/>  
-    
+          
         <label>First Name</label>
         <input v-model="first_name" type="text"/>
     
         <label>Last name</label>
         <input v-model="last_name" type="text"/>
+
+        <label>Date of Birth</label>
+        <input v-model="date_of_birth" type="text"/>
+
+        <label>Phone Number (XXX-XXX-XXXX)</label>
+        <input v-model="phone_number" type="text"/>
     
-        <label>Picture url</label>
-        <input v-model="picture_url" type="text"/>
+        <label>Contact Address</label>
+        <input v-model="contact_address" type="text"/>
     
-        <label>Create a username</label>
-        <input v-model="username" type="text"/>
+        <label>Health Card Number</label>
+        <input v-model="health_card_number" type="text"/>
+
+        <label>Email</label>
+        <input v-model="email" type="text"/>
     
         <label>Create a Password</label>
         <input v-model="password" type="password"/>
 
+        <label>Gender</label>
+        <input v-model="gender" type="text"/>
+
         <button type="submit">Submit</button>
+
+        <!-- first_name, last_name, date_of_birth, phone_number, contact_address, health_card_number, email_address, password, gender -->
     
     </form>
   
@@ -76,7 +88,7 @@ methods: {
       console.log(response)
     },
 
-  signupClients() {
+  signupPatient() {
     // event.preventDefault();
     let body = {
       email: this.email,

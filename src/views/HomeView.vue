@@ -1,19 +1,19 @@
 <template>
   <div class="home">
-    <h1> Foodies Paradise </h1>  
+    <h1> HLD Medical Clinic </h1>  
     <div id="div1">
         <div id="divform">
             <div id="formsec">
               <div id="buttons">
                   <button id="button1" class="button">
-                  <router-link  to="/client_login">
-                  Foodies
+                  <router-link  to="/doctor_login">
+                  Doctors
                   </router-link>
                   </button>
 
                   <button id="button2" class="button">
-                  <router-link  to="/restaurant_login">
-                  Restaurant
+                  <router-link  to="/patient_login">
+                  Patients
                   </router-link>
                   </button>
               </div>
@@ -52,7 +52,7 @@ formsec {
 }
 
 #div1 {
-  background-image: url('../assets/images/pexels-sydney-troxell-718742.jpg');
+  background-image: url('../assets/images/pexels-karolina-grabowska-6627854.jpg');
   background: cover;
   background-size: cover;
   background-repeat: no-repeat;
@@ -76,7 +76,7 @@ formsec {
   width: 100%;
   margin: 25px;
   display: block;  
-  background-color: rgb(161, 61, 15);   
+  background-color: rgb(139, 110, 96);   
   border-radius: 20px;
 
   

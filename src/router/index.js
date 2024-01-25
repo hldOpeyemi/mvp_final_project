@@ -2,19 +2,16 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
-import ClientSignup from '../views/ClientSignup.vue'
-import ClientLogin from '../views/ClientLogin.vue'
-import RestaurantsView from '../views/RestaurantsView.vue'
-import RestaurantSignup from '../views/RestaurantSignup.vue'
-import RestaurantView from '../views/RestaurantView.vue'
-import ClientDashboard from '../views/ClientDashboard.vue'
-import RestaurantDashboard from '../views/RestaurantDashboard.vue'
-import Cart from '../views/Cart.vue'
-import RestaurantLogin from '../views/RestaurantLogin.vue'
-import Menu from '../views/Menu.vue'
-import EditDish from '../views/EditDish.vue'
-import AddDish from '../views/AddDish.vue'
-import DeleteDish from '../views/DeleteDish.vue'
+import PatientSignup from '../views/PatientSignup.vue'
+import PatientLogin from '../views/PatientLogin.vue'
+import DoctorsView from '../views/DoctorsView.vue'
+import DoctorSignup from '../views/DoctorSignup.vue'
+import DoctorView from '../views/DoctorView.vue'
+import PatientDashboard from '../views/PatientDashboard.vue'
+import DoctorDashboard from '../views/DoctorDashboard.vue'
+import DoctorLogin from '../views/DoctorLogin.vue'
+import DeletePatient from '../views/DeletePatient.vue'
+import DeleteDoctor from '../views/DeleteDoctor.vue'
 
 Vue.use(VueRouter)
 
@@ -30,69 +27,57 @@ const routes = [
     component: AboutView
   },
   {
-    path: '/client_signup',
-    name: 'client_signup',
-    component: ClientSignup
+    path: '/patient_signup',
+    name: 'patient_signup',
+    component: PatientSignup
   },
   {
-    path: '/client_login',
-    name: 'client_login',
-    component: ClientLogin
+    path: '/patient_login',
+    name: 'patient_login',
+    component: PatientLogin
   },
   {
-    path: '/restaurants',
-    name: 'restaurants',
-    component: RestaurantsView
+    path: '/doctors',
+    name: 'doctors',
+    component: DoctorsView
   },
   {
-    path: '/restaurant_signup',
-    name: 'restaurant_signup',
-    component: RestaurantSignup
+    path: '/doctor_signup',
+    name: 'doctor_signup',
+    component: DoctorSignup
   },
   {
-    path: '/restaurant',
-    name: 'restaurant',
-    component: RestaurantView
+    path: '/doctor',
+    name: 'doctor',
+    component: DoctorView
   },
   {
-    path: '/client_dashboard',
-    name: 'client_dashboard',
-    component: ClientDashboard
+    path: '/patient_dashboard',
+    name: 'patient_dashboard',
+    component: PatientDashboard
   },
   {
-    path: '/restaurant_dashboard',
-    name: 'restaurant_dashboard',
-    component: RestaurantDashboard
+    path: '/doctor_dashboard',
+    name: 'doctor_dashboard',
+    component: DoctorDashboard
   },
+
   {
-    path: '/cart',
-    name: 'cart',
-    component: Cart
+    path: '/doctor_login',
+    name: 'doctor_login',
+    component: DoctorLogin
   },
+  
   {
-    path: '/restaurant_login',
-    name: 'restaurant_login',
-    component: RestaurantLogin
+    path: '/delete_doctor',
+    name: 'delete_doctor',
+    component: DeleteDoctor
   },
+
   {
-    path: '/menu',
-    name: 'menu',
-    component: Menu
-  },
-  {
-    path: '/edit_dish',
-    name: 'edit_dish',
-    component: EditDish
-  },
-  {
-    path: '/add_dish',
-    name: 'add_dish',
-    component: AddDish
-  },
-  {
-    path: '/delete_dish',
-    name: 'delete_dish',
-    component: DeleteDish
+    path: '/delete_patient',
+    name: 'delete_patient',
+    component: DeletePatient
   },
 ]
 

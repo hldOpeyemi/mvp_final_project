@@ -1,4 +1,4 @@
-# foodie-lab2
+# mvp_final_project
 
 ## Project setup
 ```

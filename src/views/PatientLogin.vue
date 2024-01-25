@@ -1,16 +1,16 @@
 <template>
-  <div class="clientlogin">
-    <h1> Client Log in </h1> 
+  <div class="patientlogin">
+    <h1> Patient Log in </h1> 
 
     <div id="links">
-        <router-link  to="/client_signup">
+        <router-link  to="/patient_signup">
             <li>
-            To signup as a foodie click here
+            Please signup to book an appointment
             </li>
         </router-link>
       </div>
        
-    <form v-on:submit.prevent="clientLogin">
+    <form v-on:submit.prevent="patientLogin">
       <label>email</label>
       <input v-model="email" type="text"/>   
       <label>password</label>
@@ -28,7 +28,7 @@ import axios from 'axios';
 import VueCookies from 'vue-cookies';
 
 export default {
-  name: 'ClientLogin',
+  name: 'PatientLogin',
   components: {
    // HelloWorld
   },
@@ -53,7 +53,7 @@ export default {
       console.log("FAILURE", response)
          },
 
-    clientLogin() {
+    patientLogin() {
         const body = {
         email: this.email,
         password: this.password
