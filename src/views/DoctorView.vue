@@ -1,18 +1,44 @@
 <template>
   <div>
+
     <div>
-      <img :src="restaurant.profile_url" alt="Restaurant picture" class="images"/>
+      <span id="links">
+       <nav>
+          <router-link  to="/">
+            <li>
+           Home
+            </li>
+          </router-link>
+
+          <router-link  to="/patient_dashboard">
+            <li>
+           My DashBoard
+            </li>
+          </router-link>
+
+        </nav>
+      </span>
+    </div>
+
+    <div>
+      <h1>Welcome to my page</h1>
+      
+      <h3>I am Dr. {{ doctor.first_name }}  {{ doctor.last_name }}</h3>
+
+      <h4>I am a {{ doctor.speciality }}</h4>
+    
+    <div>
+      <img :src="doctor.image_url" alt="Doctor's image" class="images"/>
     </div>
     
-    
-
+    </div>
     <div class="about">
-        <h1>{{ restaurant["name"] }}</h1>
-        <h3>{{ restaurant.address }}</h3>
-        <router-link :to="'restaurant?restaurant_id='+ restaurant.restaurant_id"/>  
+        
+        <!-- <h3>{{ doctor.speciality }}</h3> -->
+        <!-- <router-link :to="'doctor?id='+ doctor.id"/>     -->
     </div> 
-    
-    <div id="cart">
+     
+    <!-- <div id="cart">
       <h3 class="main-title">Choose Order</h3>
       <router-link  to="/cart"> <h3>Cart</h3> </router-link>
     </div>
@@ -33,7 +59,7 @@
       </ul>
      
   
-    </div>
+    </div> -->
   
 
     
@@ -49,32 +75,34 @@ import VueCookies from 'vue-cookies';
 
 
 export default {
-  name: 'RestaurantView',
+  name: 'DoctorView',
   components: { 
    // HelloWorld
   },
   
   data: function() {
     return {
-      restaurant: {},
-      menu: [],
-      cart: []
+      doctor: {},
+      // menu: [],
+      // cart: []
     }
   },
 
   methods: {
-    getRestaurant() {
-      const restaurant_id = this.$route.query.restaurant_id
+    getDoctor() {
+      const { id } = this.$route.params
       
+      const token = VueCookies.get("token")
+
       const headers = {
-      "x-api-key":"xldxOub6XfltqnJDAbVl",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+       "token": token
     }
         const options = {
         headers: headers
     }
       
-    const url = `https://foodie.bymoen.codes/api/restaurant?restaurant_id=${restaurant_id}`
+    const url = `http://localhost:5000/api/doctor/${id}`
 
     //console.log(restaurant_id)
 
@@ -82,58 +110,60 @@ export default {
     },
 
      success(response) {
-      //console.log("SUCCESS", response)
-      const restaurant=response.data[0]
-      this.restaurant=restaurant
+      console.log("SUCCESS", response)
+      const doctor=response.data
+
+      console.log("JUST THE DOCTOR", doctor)
+      this.doctor=doctor
     },
     failure(response) {
       //console.log("FAILURE", response)
     },
 
-    getMenu() {
-      const restaurant_id = this.$route.query.restaurant_id
+    // getMenu() {
+    //   const restaurant_id = this.$route.query.restaurant_id
       
-      const headers = {
-      "x-api-key":"xldxOub6XfltqnJDAbVl",
-      "Content-Type": "application/json"
-    }
-        const options = {
-        headers: headers
-    }
+    //   const headers = {
+    //   "x-api-key":"xldxOub6XfltqnJDAbVl",
+    //   "Content-Type": "application/json"
+    // }
+    //     const options = {
+    //     headers: headers
+    // }
       
-    const url = `https://foodie.bymoen.codes/api/menu?restaurant_id=${restaurant_id}`
+    // const url = `https://foodie.bymoen.codes/api/menu?restaurant_id=${restaurant_id}`
 
-    //console.log(restaurant_id)
+    // //console.log(restaurant_id)
 
-    axios.get(url,options).then(this.menuSuccess).catch(this.menuFailure)
-    },
+    // axios.get(url,options).then(this.menuSuccess).catch(this.menuFailure)
+    // },
 
 
-    menuSuccess(response) {
-      //console.log("Menu SUCCESS", response)
-      const menu=response.data
-      this.menu=menu
+    // menuSuccess(response) {
+    //   //console.log("Menu SUCCESS", response)
+    //   const menu=response.data
+    //   this.menu=menu
     
-    },
-    menuFailure(response) {
-      //console.log("Menu FAILURE", response)
-    },
+    // },
+    // menuFailure(response) {
+    //   //console.log("Menu FAILURE", response)
+    // },
 
-    addToCart(item) {
+    // addToCart(item) {
       
-      this.cart.push(item)
+    //   this.cart.push(item)
       
-      VueCookies.set("cart", JSON.stringify(this.cart))
-      const cookies = this.$cookies.get("cart")
-      console.log(cookies)
-    },
+    //   VueCookies.set("cart", JSON.stringify(this.cart))
+    //   const cookies = this.$cookies.get("cart")
+    //   console.log(cookies)
+    // },
 
 
   },
 
   created() {
-    this.getMenu()
-    this.getRestaurant()
+    // this.getMenu()
+    this.getDoctor()
     //console.log(cookies)
   }
  
@@ -165,40 +195,21 @@ export default {
 
 }
 
-/* .menuwrapper {
+nav {
   display: inline-block;
-  width: 30%;
-  margin-top: 1rem;
-  gap: 2%;
-  border-radius: 8px;
 }
 
-#menudetails {
-  min-height: 200px;
-  height: 100%;
-  background-color: aqua;
-  border-radius: 8px;
-  margin: 1% 0;
-  box-sizing: green 0px 2px 8px 0px;
-  cursor: pointer;
+li {
+  display: inline-block;
+  padding: 20px;
+  margin: 20px;
+  border-style: dotted;
+  border-color: beige;
+  border-radius: 20px;
+  color: rgb(77, 67, 86);
+  background-color: rgb(215, 183, 152);
 }
 
-#dishimage {
-  width: 20%;
-  height:180px;
-  border-radius: 8px;
-  object-fit: cover;
-  object-position: center;
-  filter:brightness(0.8)
-}
-
-/* #menu-description {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 3%;
-  width: 100%
-} */
 
 .images {
   width: 200px

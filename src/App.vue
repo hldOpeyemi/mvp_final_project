@@ -29,9 +29,7 @@ export default {
   
 }
 
-body {
-  background-color: rgb(122, 99, 48);
- }
+
 nav {
   padding: 30px;
 }

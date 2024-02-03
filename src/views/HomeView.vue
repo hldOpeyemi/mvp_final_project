@@ -1,27 +1,38 @@
 <template>
-  <div class="home">
-    <h1> HLD Medical Clinic </h1>  
-    <div id="div1">
-        <div id="divform">
-            <div id="formsec">
-              <div id="buttons">
-                  <button id="button1" class="button">
-                  <router-link  to="/doctor_login">
-                  Doctors
-                  </router-link>
-                  </button>
+  <body>
+    <div id="header" class="headers">
+    
+      <h1> HLD Medical Clinic </h1>  
 
-                  <button id="button2" class="button">
-                  <router-link  to="/patient_login">
-                  Patients
-                  </router-link>
-                  </button>
-              </div>
-          </div>
+      <!-- navigation buttons here on the header -->
+    </div>
+
+    <section id="pages">
+       
+      <div id="pagesdiv" >
+        
+        <div class="button" id="button1">
+          <div><img src="../assets/images/pexels-antoni-shkraba-5215017.jpg"></div>
+          <div><router-link  to="/doctor_login"> Doctors </router-link></div>
         </div>
-    </div>  
 
-  </div>
+        <div class="button" id="button2">
+          <div><img src="../assets/images/pexels-mart-production-7089401.jpg"></div>
+          <div><router-link  to="/patient_login"> Patients </router-link></div>
+        </div>
+
+        <div class="button" id="appts">
+          <div>Book an Appointments Here</div>
+        </div>
+            
+      </div>
+
+    </section>   
+        
+   
+
+ 
+</body>
 </template>
 
 <script scoped>
@@ -43,10 +54,11 @@ divform {
 }
 
 
-formsec {
+#pagesdiv {
   display: grid;
-  width: 200px;
-  margin-right: 0px;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+  
   
 
 }
@@ -59,7 +71,7 @@ formsec {
   width: 100vw;
   height: 800px;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr;
   justify-content: right;
   align-items: right;
   min-height: 80vh;
@@ -71,26 +83,38 @@ formsec {
   height: 800px;
 }
 
-#buttons {
+.button {
   
   width: 100%;
   margin: 25px;
   display: block;  
-  background-color: rgb(139, 110, 96);   
+  background-color: rgb(201, 189, 183);   
   border-radius: 20px;
-
-  
 }
 
 #button1 {
   
+  width: 60%;
+  padding: 20px;
+  border-radius: 20px;
+  justify-content: flex-end; 
+}
+
+#pages {
+  background-color: rgb(224, 211, 198);
+  border-radius: 20px;
+  display: inline;
+ }
+
+#button2 {
+  
   width: 55%;
   padding: 20px;
   border-radius: 20px;
-  display: inline-block;   
+  justify-content: left;
 }
 
-#formsec :hover {
+#pagesdiv :hover {
   animation: shake 0.5s;
   animation-iteration-count: initial;
 }
@@ -133,12 +157,16 @@ formsec {
    
 }
 
-#button2 {
-  
-  width: 55%;
-  padding: 20px;
-  border-radius: 20px;
-  display: inline-block;    
- 
+img {
+  width: 300px;
+  height: 350px;
 }
+
+#header {
+  background-color: rgb(206, 204, 200);
+  margin: 50px;
+  border-radius: 20px;
+}
+
+
 </style>

@@ -12,6 +12,7 @@ import DoctorDashboard from '../views/DoctorDashboard.vue'
 import DoctorLogin from '../views/DoctorLogin.vue'
 import DeletePatient from '../views/DeletePatient.vue'
 import DeleteDoctor from '../views/DeleteDoctor.vue'
+import EditPatient from '../views/EditPatient.vue'
 
 Vue.use(VueRouter)
 
@@ -46,8 +47,8 @@ const routes = [
     name: 'doctor_signup',
     component: DoctorSignup
   },
-  {
-    path: '/doctor',
+  { 
+    path: '/doctors/:id',
     name: 'doctor',
     component: DoctorView
   },
@@ -79,6 +80,14 @@ const routes = [
     name: 'delete_patient',
     component: DeletePatient
   },
+
+  {
+    path: '/edit_patient',
+    name: 'edit_patient',
+    component: EditPatient
+  },
+
+
 ]
 
 const router = new VueRouter({

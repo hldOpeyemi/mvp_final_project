@@ -1,29 +1,30 @@
 <template>
-  <div class="client_dashboard">
-    <h1> Foodies Spot </h1>   
+  <div class="patient_dashboard">
+
+    <div class="about">
+        <h1>{{ patient["first_name"] }} {{ patient["last_name"] }}</h1>
+        <h3>{{ patient.contact_address}}</h3>
+        <router-link :to="'patient?patient_id='+ patient.patient_id"/>
+    </div>
+
+    <h1> Welcome to your Page </h1>   
     <span id="links">
       <nav>
-        <router-link  to="/orders" v-if="userLoggedIn()">
+          <router-link  to="/">
             <li>
-           Orders
-            </li>
-          </router-link>
-          
-          <router-link  to="/client_login" v-else>
-            <li>
-            Login
+           Home
             </li>
           </router-link>
 
-          <router-link  to="/restaurants">
+          <router-link  to="/doctors">
             <li>
-            Restaurants
+           Doctors
             </li>
           </router-link>
 
-          <router-link  to="/client_signup">
+          <router-link  to="/edit_patient">
             <li>
-            Join Foodies
+           Edit Profile
             </li>
           </router-link>
       </nav>
@@ -33,28 +34,56 @@
 </template>
 
 <script >
-
+import axios from 'axios';
+import VueCookies from 'vue-cookies';
 
 export default {
-  name: 'clientDashboard',
+  name: 'patientDashboard',
   components: {
    // HelloWorld
   },
 
-methods: {
+  data: function() {
+    return {
+      patient: {}
+    }
+  },
 
-  userLoggedIn() {
-     const token = this.$cookies.get("token")
-     if (token) {
-      return true
-     }
-     return false
+
+methods: {
+  getPatient() {
+    const patient_id = VueCookies.get("patient_id")
+    // const token = VueCookies.get("token")
+    console.log(patient_id)
+
+    const headers = {
+      "Content-Type": "application/json",
+      // "token": token
+    }
+
+    const options = {
+        headers: headers
+    }
+      
+    const url = `http://localhost:5000/api/patient?patient_id=${patient_id}`
+
+    axios.get(url,options).then(this.success).catch(this.failure)
     },
 
+     success(response) {
+      console.log("SUCCESS", response)
+      const patient=response.data
+      this.patient=patient
+     },
+     
+    failure(response) {
+      //console.log("FAILURE", response)
+    }
+  },
 
-
-
-}
+  created() {
+    this.getPatient()
+  }
 
 }
 

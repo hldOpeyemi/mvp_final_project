@@ -1,10 +1,10 @@
 <template>
   <body>
-    <div class="wrapper">
-      <h3>Patient Sign Up</h3>
+    <div>
+      <h3>Edit Your Details with Us</h3>
       
-              <div id="signup">
-                <form v-on:submit.prevent="signupPatient">
+              <div id="update">
+                <form v-on:submit.prevent="updatePatient">
                 
                   <label>First Name</label>
                   <input v-model="first_name" type="text"/>
@@ -36,7 +36,7 @@
                   <label>Emergency Contact Number</label>
                   <input v-model="emergency_contact" type="text"/>
 
-                  <button type="submit">Submit</button>
+                  <button v-on:click="saveChange">Submit Changes</button>
 
               <!-- first_name, last_name, date_of_birth, phone_number, contact_address, health_card_number, email_address, password, gender -->
           
@@ -54,7 +54,7 @@ import VueCookies from 'vue-cookies';
 // import VueRouter from 'vue-router'
 
 export default {
-  name: 'PatientSignup',
+  name: 'EditPatient',
   components: {
    // HelloWorld
   },
@@ -87,21 +87,23 @@ created: function() {
 
 methods: {
 
-  success(response) {
-      console.log(response);
-      if (response.status === 200) {
-        VueCookies.set("token", response.data.token)
-        this.$router.push("/patient_login")
-      }
-    },
-  
-    failure(response) {
-      console.log(response)
+  saveChange() {
+      console.log("saving this")
+      this.updatePatient()
     },
 
-  signupPatient() {
-    // event.preventDefault();
-    let body = {
+
+  updatePatient() {
+    
+    const token = VueCookies.get("token")
+
+    const headers = {
+      "Content-Type": "application/json",
+      "token": token
+
+    }
+
+    const body = {
 
       first_name: this.first_name,
       last_name: this.last_name,
@@ -115,27 +117,44 @@ methods: {
       emergency_contact: this.emergency_contact
 
     }
-
-    console.log(body)
-
-    const headers = {
-      "Content-Type": "application/json"
-    }
-
+  
     const options = {
       headers: headers
     }
 
     const url = "http://localhost:5000/api/patient" 
 
-    // URL -> Parameter 1 of the .post function
-    // BODY -> Parameter 2 of the .post function
-    // OPTINS -> Parameter 2 of the .post function
-    axios.post(url,body,options).then(this.success).catch(this.failure)    
+    axios.patch(url,body,options).then(this.patchPatientSuccess).catch(this.patchPatientFailure)    
+
+  },
+
+    patchPatientSuccess(response) {
+      console.log("Patch SUCCESS", response)
+      if (response.status === 200) {
+      this.$router.push('/patient_dashboard').catch(()=>{})
+      
+      }
+          
+    },
+
+    patchPatientFailure(response) {
+      console.log("Patch FAILURE", response)
+    },
 
   }
 
-  }
+
+   // success(response) {
+  //     console.log(response);
+  //     if (response.status === 200) {
+  //       VueCookies.set("token", response.data.token)
+  //       this.$router.push("/patient_dashboard")
+  //     }
+  //   },
+  
+  //   failure(response) {
+  //     console.log(response)
+  //   },
 
 }
 

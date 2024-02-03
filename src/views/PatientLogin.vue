@@ -5,7 +5,7 @@
     <div id="links">
         <router-link  to="/patient_signup">
             <li>
-            Please signup to book an appointment
+            Please login to book an appointment
             </li>
         </router-link>
       </div>
@@ -43,9 +43,10 @@ export default {
   methods: {
     success(response) {
       console.log("SUCCESS", response)
-      if (response.status === 201) {
+      if (response.status === 200) {
         VueCookies.set("token", response.data.token)
-        this.$router.push("/restaurants")
+        VueCookies.set("patient_id", response.data.patient_id)
+        this.$router.push("/patient_dashboard")
           }
         },
     
@@ -58,20 +59,10 @@ export default {
         email: this.email,
         password: this.password
           }
-   
-        const headers = {
-        "x-api-key":"xldxOub6XfltqnJDAbVl",
-    
-          }
-  
-        const options = {
-        headers: headers
-        }
 
+    const url = "http://localhost:5000/api/patient-login"
 
-    const url = "https://foodie.bymoen.codes/api/client-login"
-
-    axios.post(url,body,options).then(this.success).catch(this.failure)
+    axios.post(url,body).then(this.success).catch(this.failure)
     
     }
   }

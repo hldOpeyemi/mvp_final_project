@@ -1,32 +1,36 @@
 <template>
   <div class="about">
-    <h1> Restaurants </h1>
+    <h1> Doctors </h1>
     <div> 
       <span id="links">
-         <router-link  to="/client_dashboard">
+        <router-link  to="/">
            <li class="router">
-              Foodies
+              Home
            </li>
         </router-link>
 
-        <router-link  to="/client_login">
+        <router-link  to="/patient_dashboard">
             <li class="router">
-              Sign in
+              My Dashboard
             </li>
         </router-link>
+
+
       </span>
     </div>
     
-      <div v-for="restaurant in restaurants" :key="restaurant.id" id="theplaces">
+      <div v-for="doctor in doctors" :key="doctor.id" id="health">
         <ul>
-          <li class="restaurants">
-              <h3>{{ restaurant.name }}</h3>
-              <h4>{{ restaurant.address }}</h4>
-              <img :src="restaurant.profile_url" alt="Restaurant picture"/>
-              <router-link :to="'restaurant?restaurant_id='+ restaurant.restaurant_id">
-                <button>Go here</button>
-              </router-link>
+          <li class="doctors">
+              <h3>Dr. {{ doctor.first_name }} {{ doctor.last_name }}</h3>
+              <h4>Speciality - {{ doctor.speciality }}</h4>
+              <img :src="doctor.image_url" alt="Doctor's Picture"/>
+          
           </li>
+          <router-link :to="'doctors/'+ doctor.id">
+              <button class="btn">Visit my page to book an appointment </button>
+          </router-link>
+
         </ul>
         
       </div>
@@ -42,14 +46,13 @@
 import axios from 'axios';
 
 export default {
-  name: 'RestaurantView',
+  name: 'DoctorsView',
   components: {
    // HelloWorld
   },
 
   created: function() {
     const headers = {
-      "x-api-key":"xldxOub6XfltqnJDAbVl",
       "Content-Type": "application/json"
     }
 
@@ -57,19 +60,16 @@ export default {
       headers: headers
     }
 
-    const url = "https://foodie.bymoen.codes/api/restaurants" 
+    const url = "http://localhost:5000/api/doctors" 
 
-    // URL -> Parameter 1 of the .post function
-    // BODY -> Parameter 2 of the .post function
-    // OPTINS -> Parameter 2 of the .post function
     axios.get(url,options).then(this.success).catch(this.failure)    
     
-    console.log("creating restaurant")
+    // console.log("creating restaurant")
 }, 
 
   data: function() {
   return {
-    restaurants: []
+    doctors: []
 
   }
 },
@@ -77,24 +77,9 @@ export default {
  methods : {
   success(response) {
       console.log("SUCCESS", response);
-
-      const restaurants = response.data 
-
-      function checkRestaurant(restaurant) {
-        console.log(restaurant.name )
-        return restaurant.name !== "dkaslkkd";
-      }
-
-      // With normal syntax
-      // const filterRestaurants = restaurants.filter(checkRestaurant)
-
-      const filterRestaurants = restaurants.filter((restaurant) => {
-        return restaurant.name !== "dkaslkkd";
-      })
-
-      this.restaurants = filterRestaurants
-      console.log(this.restaurants)
-
+      
+      const doctors = response.data 
+      this.doctors = doctors
     },
   
     failure(response) {
@@ -108,7 +93,7 @@ export default {
 </script>
 
 <style scoped>
-#theplaces {
+#health {
   margin-top: 20px;
   display: inline-block;
 }
@@ -120,10 +105,56 @@ img {
 }
 
 button {
-  width: 20%;
+  width: 200px;
   color: #555;
   padding: 10px 6px;
   margin: 25px 50px ;
+  border-radius: 28px;
+  border-style: none;
+  border-color: rgb(134, 126, 88);
+}
+
+.btn:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: initial;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+
+   
 }
 
 .router {
