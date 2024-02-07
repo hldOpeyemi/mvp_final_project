@@ -1,170 +1,95 @@
 <template>
- 
- <div class="home">
+  <div class="patient_dashboard">
 
-    <div>
-      <h1>{{ restaurant.name }}</h1>
-      <h1>{{ restaurant.address }}</h1>
-    </div>
-    <div></div>
-    <div>
-        <h1> {{ restaurant.name }} Dashboard </h1>    
+    <div class="about">
+        <h1>{{ doctor["first_name"] }} {{ doctor["last_name"] }}</h1>
+        <h3>{{ doctor.speciality}}</h3>
+        <!-- <router-link :to="'patient?patient_id='+ patient.patient_id"/> -->
     </div>
 
-    <div id="links">
-        <router-link  to="/restaurants">
-            <li class="router">
-              Restaurants
+    <h1> Welcome to your Page </h1>   
+    <span id="links">
+      <nav>
+          <router-link  to="/">
+            <li>
+           Home
             </li>
-        </router-link>
+          </router-link>
 
-        <router-link  to="/Menu">
-            <li class="router">
-              Menu
+          <router-link  to="/doctors">
+            <li>
+           Doctors
             </li>
-        </router-link>
+          </router-link>
 
-        <router-link  to="/add_dish">
-            <li class="router">
-              Add New Dish 
+          <router-link  to="/edit_patient">
+            <li>
+           Edit Profile
             </li>
-        </router-link>
-
-        <router-link  to="/delete_dish">
-            <li class="router">
-              Delete Dish 
-            </li>
-        </router-link>
-
-     </div>
-     
-     <div>
-      <article v-for="menuItem in menu" :key="menuItem.id">
-        
-          <div id="menulist"> 
-            <ul>
-              <li class="menu">
-                  
-                <h5>{{menuItem.name}}</h5>
-                <h5>{{menuItem.description}}</h5>
-                <img :src="menuItem.image_url" alt="Menu_Image" class="images"/>
-                <button v-on:click="goToDish(menuItem.id)">Edit Dish</button>
-                
-              </li>
-            </ul>
-           
-          </div>
-        
-      </article>
-    </div>
-     
-
+          </router-link>
+      </nav>
+      </span>
   </div>
+
 </template>
 
 <script >
-
 import axios from 'axios';
 import VueCookies from 'vue-cookies';
 
-import myHeader from "../components/MyHeader.vue"
-
 export default {
-  name: 'RestaurantDashboard',
+  name: 'docotrDashboard',
   components: {
    // HelloWorld
-   "my-header": myHeader
   },
 
   data: function() {
     return {
-      restaurant: {},
-      menu: [],
-     }
-  },
-  created: function() {
-    const token = VueCookies.get("token")
-    if (!token) {
-      this.$router.push("/")
-    }  
-
-    // api => if token legit
-
-    this.getRestaurant()
-    this.getMenu()
-  }, 
-
-  methods : {
-    goToDish(id) {
-        console.log(id)
-        const restaurant_id = VueCookies.get("restaurant_id")
-        this.$router.push(`/edit_dish?menu_id=${id}&restaurant_id=${restaurant_id}`)
-        
-     },
-
-    
-  
-     getRestaurant() {
-      const restaurant_id = VueCookies.get("restaurant_id")
-
-      console.log(restaurant_id)
-      
-      const headers = {
-      "x-api-key":"xldxOub6XfltqnJDAbVl",
-      "Content-Type": "application/json"
+      doctor: {}
     }
-    
+  },
+
+
+methods: {
+  getDoctor() {
+    const doctor_id = VueCookies.get("doctor_id")
+    const token = VueCookies.get("token")
+    console.log(doctor_id)
+
+    const headers = {
+      "Content-Type": "application/json",
+      "token": token
+    }
+
     const options = {
         headers: headers
     }
       
-    const url = `https://foodie.bymoen.codes/api/restaurant?restaurant_id=${restaurant_id}`
+    const url = `http://localhost:5000/api/doctor?doctor_id=${doctor_id}`
 
     axios.get(url,options).then(this.success).catch(this.failure)
-
     },
-    success(response) {
+
+     success(response) {
       console.log("SUCCESS", response)
-      const restaurant=response.data[0]
-      this.restaurant=restaurant
-    },
+      const doctor=response.data
+      this.doctor=doctor
+     },
+     
     failure(response) {
-      console.log("FAILURE", response)
-    },
-    
-    getMenu(){
-      console.log("GETTING MENU")
-      
-      const restaurant_id = VueCookies.get("restaurant_id")
-      
-      const headers = {
-      "x-api-key":"xldxOub6XfltqnJDAbVl",
-      "Content-Type": "application/json"
+      //console.log("FAILURE", response)
     }
-        const options = {
-        headers: headers
-    }
-      
-    const url = `https://foodie.bymoen.codes/api/menu?restaurant_id=${restaurant_id}`
-    
-    axios.get(url,options).then(this.menuSuccess).catch(this.menuFailure)},
+  },
 
-    menuSuccess(response) {
-      console.log("Menu SUCCESS", response)
-      const menu=response.data
-      this.menu=menu
-    
-    },
-    menuFailure(response) {
-      //console.log("Menu FAILURE", response)
-    },
+  created() {
+    this.getDoctor()
+  }
 
-
-
-    }
+}
 
   
-}
+  
+
 </script>
 
 
@@ -173,11 +98,12 @@ export default {
 <style scoped>
 
 
-#links {
+
+nav {
   display: inline-block;
 }
 
-.router {
+li {
   display: inline-block;
   padding: 20px;
   margin: 20px;

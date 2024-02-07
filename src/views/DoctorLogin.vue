@@ -1,26 +1,26 @@
 <template>
   
   <div>
-      <div class="restaurantlogin">
+      <div class="doctorlogin">
 
-        <h1> Restaurant Login / Signup Page </h1> 
+        <h1> Doctor Login / Signup Page </h1> 
   
       </div>   
       
       <div id="links">
-        <router-link  to="/restaurant_signup">
+        <router-link  to="/doctor_signup">
             <li>
-            To signup as a restaurant click here
+            To signup as a doctor click here
             </li>
         </router-link>
       </div>
         
       <div>  
-          <form v-on:submit.prevent="restaurantLogin">
+          <form v-on:submit.prevent="doctorLogin">
             <h3>Login</h3>
 
             <label>email</label>
-            <input v-model="email" type="text"/>   
+            <input v-model="email_address" type="text"/>   
             <label>password</label>
             <input v-model="password" type="password"/>
 
@@ -36,14 +36,14 @@ import axios from 'axios';
 import VueCookies from 'vue-cookies';
 
 export default {
-  name: 'RestaurantLogin',
+  name: 'DoctorLogin',
   components: {
    // HelloWorld
   },
 
   data: function() {
     return {
-      email: "",
+      email_address: "",
       password: ""
     }
   },
@@ -51,10 +51,10 @@ export default {
   methods: {
     success(response) {
       console.log("SUCCESS", response)
-      if (response.status === 201) {
+      if (response.status === 200) {
         VueCookies.set("token", response.data.token)
-        VueCookies.set("restaurant_id", response.data.restaurant_id)
-        this.$router.push('/restaurant_dashboard')
+        VueCookies.set("doctor_id", response.data.doctor_id)
+        this.$router.push('/doctor_dashboard')
           }
         },
     
@@ -62,25 +62,16 @@ export default {
       console.log("FAILURE", response)
          },
 
-    restaurantLogin() {
+    doctorLogin() {
         const body = {
-        email: this.email,
+        email_address: this.email_address,
         password: this.password
           }
-   
-        const headers = {
-        "x-api-key":"xldxOub6XfltqnJDAbVl",
-    
-          }
-  
-        const options = {
-        headers: headers
-        }
+          console.log(body)
 
+     const url = "http://localhost:5000/api/doctor-login"
 
-    const url = "https://foodie.bymoen.codes/api/restaurant-login"
-
-    axios.post(url,body,options).then(this.success).catch(this.failure)
+      axios.post(url,body).then(this.success).catch(this.failure)
     
     }
   }
