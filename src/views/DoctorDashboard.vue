@@ -24,6 +24,12 @@
 
           <router-link  to="/edit_patient">
             <li>
+           Edit Patient
+            </li>
+          </router-link>
+
+          <router-link  to="/edit_doctor">
+            <li>
            Edit Profile
             </li>
           </router-link>

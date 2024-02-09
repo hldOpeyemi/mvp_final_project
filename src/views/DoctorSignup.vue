@@ -1,38 +1,29 @@
 <template>
-  <div class="restaurantsignup">
-       <h3>Restuarant Sign Up</h3>
+  <div class="doctorsignup">
+       <h3>Doctor Sign Up</h3>
     <form v-on:submit.prevent="validateInput">
 
-        <label>Email</label>
-        <input v-model="email" type="text"/>  
+        <label>First Name</label>
+        <input v-model="first_name" type="text"/>  
     
-        <label>Name</label>
-        <input v-model="name" type="text"/>
+        <label>Last Name</label>
+        <input v-model="last_name" type="text"/>
     
-        <label>Address</label>
-        <input v-model="address" type="text"/>
+        <label>Medical ID</label>
+        <input v-model="medical_id" type="text"/>
     
-        <label>Phone Number (XXX-XXX-XXXX)</label>
-        <input v-model="phone_number" type="text"/>
-    
-        <label>Bio</label>
-        <input v-model="bio" type="text"/>
-    
-        <label>City</label>
-        <select v-model="city" id="select">
-          <option value="Toronto">Toronto</option>
-          <option value="Vancouver">Vancouver</option>
-          <option value="Calgary">Calgary</option>
-        </select>
+        <label>Speciality</label>
+        <input v-model="speciality" type="text"/>
 
-        <label>Profile URL</label>
-        <input v-model="profile_url" type="text"/>
-
-        <label>Banner URL</label>
-        <input v-model="banner_url" type="text"/>
-        
+        <label>Email Address</label>
+        <input v-model="email_address" type="text"/>
+      
         <label>Create a Password</label>
         <input v-model="password" type="password"/>
+
+        <label>Upload an Image</label>
+        <input v-model="image_url" type="text"/>
+  
 
         <button type="submit">Submit</button>
     
@@ -49,7 +40,7 @@ import VueCookies from 'vue-cookies';
 // import VueRouter from 'vue-router'
 
 export default {
-  name: 'RestaurantSignup',
+  name: 'DoctorSignup',
   components: {
    // HelloWorld
   },
@@ -57,15 +48,13 @@ export default {
 
 data: function() {
   return {
-    email: "",
-    name: "",
-    address: "",
-    phone_number: "",
-    bio: "",
-    city:"",
-    profile_url: "",
-    banner_url: "",
-    password: ""
+    first_name:"",
+    last_name:"",
+    medical_id: "",
+    speciality: "",
+    email_address: "",
+    password: "",
+    image_url:""
 }
 
   
@@ -83,21 +72,16 @@ methods: {
   validateInput(){
     console.log("validating")
     
-    if (this.name === "") {
+    if (this.first_name === "") {
       console.log("Empty name field")
       return
     }
-    console.log(this.phone_number.length, this.phone_number)
-    if (this.phone_number.length !== 12 || this.phone_number[3] !== "-") {
-      console.log("Phone number invalid, correct format is XXX-XXX-XXXX")
-      return
-    }
 
-    this.signupRestaurant()
+    this.signupDoctor()
   },  
   success(response) {
       console.log(response);
-      if (response.status === 201) {
+      if (response.status === 200) {
         VueCookies.set("token", response.data.token)
         this.$router.push("/")
       }
@@ -107,23 +91,22 @@ methods: {
       console.log(response)
     },
 
-  signupRestaurant() {
+    signupDoctor() {
     // event.preventDefault();
     let body = {
-      email: this.email,
-      name: this.name,
-      address: this.address,
-      phone_number: this.phone_number,
-      bio: this.bio,
-      city: this.city,
-      profile_url: this.profile_url,
-      banner_url: this.banner_url,
-      password: this.password     
+
+      first_name:this.first_name,
+      last_name:this.last_name,
+      medical_id:this.medical_id,
+      speciality:this.speciality,
+      email_address:this.email_address,
+      password: this.password,
+      image_url:this.image_url
+        
     }
      console.log(body)
 
     const headers = {
-      "x-api-key":"xldxOub6XfltqnJDAbVl",
       "Content-Type": "application/json"
     }
 
@@ -131,11 +114,9 @@ methods: {
       headers: headers
     }
 
-    const url = "https://foodie.bymoen.codes/api/restaurant" 
+    const url = "http://localhost:5000/api/doctor" 
 
-    // URL -> Parameter 1 of the .post function
-    // BODY -> Parameter 2 of the .post function
-    // OPTINS -> Parameter 2 of the .post function
+   
     axios.post(url,body,options).then(this.success).catch(this.failure)    
 
   }
@@ -143,9 +124,6 @@ methods: {
   }
 
 }
-
-
-
 
 </script>
 

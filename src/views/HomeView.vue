@@ -1,172 +1,78 @@
 <template>
-  <body>
-    <div id="header" class="headers">
-    
-      <h1> HLD Medical Clinic </h1>  
+  <div id="all">
+    <header>
+      <h1>HLD Medical Clinic</h1>
+      <!-- Add navigation buttons here -->
+    </header>
 
-      <!-- navigation buttons here on the header -->
-    </div>
-
-    <section id="pages">
-       
-      <div id="pagesdiv" >
-        
+    <main>
+      <section id="buttons">
         <div class="button" id="button1">
-          <div><img src="../assets/images/pexels-antoni-shkraba-5215017.jpg"></div>
-          <div><router-link  to="/doctor_login"> Doctors </router-link></div>
+          <div><img src="../assets/images/pexels-antoni-shkraba-5215017.jpg" alt="Doctors"></div>
+          <div><router-link to="/doctor_login">Doctors</router-link></div>
         </div>
 
         <div class="button" id="button2">
-          <div><img src="../assets/images/pexels-mart-production-7089401.jpg"></div>
-          <div><router-link  to="/patient_login"> Patients </router-link></div>
+          <div><img src="../assets/images/pexels-mart-production-7089401.jpg" alt="Patients"></div>
+          <div><router-link to="/patient_login">Patients</router-link></div>
         </div>
 
-        <div class="button" id="appts">
-          <div>Book an Appointments Here</div>
+        <div class="button" id="appointments">
+          <div>Book an Appointment Here</div>
         </div>
-            
-      </div>
-
-    </section>   
-        
-   
-
- 
-</body>
+      </section>
+    </main>
+  </div>
 </template>
 
-<script scoped>
-// @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
-
+<script>
 export default {
-  name: 'HomeView',
-  components: {
-   // HelloWorld
-  }
+  name: 'HomeView'
 }
 </script>
 
-<style scoped>
-
-divform {
-  border-radius: 50px
-}
-
-
-#pagesdiv {
+<style>
+#buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  
-  
-  
-
-}
-
-#div1 {
-  background-image: url('../assets/images/pexels-karolina-grabowska-6627854.jpg');
-  background: cover;
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100vw;
-  height: 800px;
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-content: right;
-  align-items: right;
-  min-height: 80vh;
-  border-radius: 50px;
-}
-
-#image1 {
-  width: 1500px;
-  height: 800px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
 .button {
-  
-  width: 100%;
-  margin: 25px;
-  display: block;  
-  background-color: rgb(201, 189, 183);   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgb(163, 144, 119);
   border-radius: 20px;
+  transition: transform 0.3s ease;
 }
 
-#button1 {
-  
-  width: 60%;
-  padding: 20px;
-  border-radius: 20px;
-  justify-content: flex-end; 
-}
-
-#pages {
-  background-color: rgb(224, 211, 198);
-  border-radius: 20px;
-  display: inline;
- }
-
-#button2 {
-  
-  width: 55%;
-  padding: 20px;
-  border-radius: 20px;
-  justify-content: left;
-}
-
-#pagesdiv :hover {
-  animation: shake 0.5s;
-  animation-iteration-count: initial;
-}
-
-@keyframes shake {
-  0% {
-    transform: translate(1px, 1px) rotate(0deg);
-  }
-  10% {
-    transform: translate(-1px, -2px) rotate(-1deg);
-  }
-  20% {
-    transform: translate(-3px, 0px) rotate(1deg);
-  }
-  30% {
-    transform: translate(3px, 2px) rotate(0deg);
-  }
-  40% {
-    transform: translate(1px, -1px) rotate(1deg);
-  }
-  50% {
-    transform: translate(-1px, 2px) rotate(-1deg);
-  }
-  60% {
-    transform: translate(-3px, 1px) rotate(0deg);
-  }
-  70% {
-    transform: translate(3px, 1px) rotate(-1deg);
-  }
-  80% {
-    transform: translate(-1px, -1px) rotate(1deg);
-  }
-  90% {
-    transform: translate(1px, 2px) rotate(0deg);
-  }
-  100% {
-    transform: translate(1px, -2px) rotate(-1deg);
-  }
-
-   
+.button:hover {
+  transform: scale(1.05);
 }
 
 img {
-  width: 300px;
-  height: 350px;
+  width: 100%;
+  height: auto;
 }
 
-#header {
-  background-color: rgb(206, 204, 200);
-  margin: 50px;
+header {
+  background-color: rgb(226, 205, 161);
+  padding: 1rem;
   border-radius: 20px;
+  margin-bottom: 1rem;
 }
 
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  text-align: center;
+}
+
+#all{
+background-color: #bdae90;
+}
 
 </style>

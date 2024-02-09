@@ -13,10 +13,16 @@ import DoctorLogin from '../views/DoctorLogin.vue'
 import DeletePatient from '../views/DeletePatient.vue'
 import DeleteDoctor from '../views/DeleteDoctor.vue'
 import EditPatient from '../views/EditPatient.vue'
+import EditDoctor from '../views/EditDoctor.vue'
+
+
+
+
 
 Vue.use(VueRouter)
 
 const routes = [
+ 
   {
     path: '/',
     name: 'home',
@@ -86,6 +92,13 @@ const routes = [
     name: 'edit_patient',
     component: EditPatient
   },
+
+  {
+    path: '/edit_doctor',
+    name: 'edit_doctor',
+    component: EditDoctor
+  },
+
 
 
 ]
