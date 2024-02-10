@@ -44,7 +44,7 @@ export default {
     success(response) {
       console.log("SUCCESS", response)
       if (response.status === 200) {
-        VueCookies.set("token", response.data.token)
+        VueCookies.set("patient_token", response.data.patient_token)
         VueCookies.set("patient_id", response.data.patient_id)
         this.$router.push("/patient_dashboard")
           }

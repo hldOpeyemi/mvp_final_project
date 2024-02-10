@@ -31,35 +31,14 @@
       <img :src="doctor.image_url" alt="Doctor's image" class="images"/>
     </div>
     
+    <router-link to="/appointment">
+      <button class="btn">Book an Appointment</button>
+    </router-link>
+    
     </div>
     <div class="about">
         
-        <!-- <h3>{{ doctor.speciality }}</h3> -->
-        <!-- <router-link :to="'doctor?id='+ doctor.id"/>     -->
     </div> 
-     
-    <!-- <div id="cart">
-      <h3 class="main-title">Choose Order</h3>
-      <router-link  to="/cart"> <h3>Cart</h3> </router-link>
-    </div>
-
-    <div v-for="menuItem in menu" :key="menuItem.id" id="menuholder">
-      <ul>
-          <li class="menulist">
-            <div id="menu-desc">
-              <img :src="menuItem.image_url" alt="Menu_Image" id="dishimage"/>          
-              <h1 class="menuname">{{menuItem.name}}</h1>
-              <h3>{{menuItem.description}}</h3>
-              <h1>${{menuItem.price}}.00</h1>
-              <button v-on:click="addToCart(menuItem)"> Click to Order</button>
-              
-            </div>
-          </li>
-
-      </ul>
-     
-  
-    </div> -->
   
 
     
@@ -83,8 +62,7 @@ export default {
   data: function() {
     return {
       doctor: {},
-      // menu: [],
-      // cart: []
+      
     }
   },
 
@@ -102,7 +80,7 @@ export default {
         headers: headers
     }
       
-    const url = `http://localhost:5000/api/doctor/${id}`
+    const url = `http://localhost:5000/api/doctor?doctor_id=${id}`
 
     //console.log(restaurant_id)
 
@@ -119,45 +97,6 @@ export default {
     failure(response) {
       //console.log("FAILURE", response)
     },
-
-    // getMenu() {
-    //   const restaurant_id = this.$route.query.restaurant_id
-      
-    //   const headers = {
-    //   "x-api-key":"xldxOub6XfltqnJDAbVl",
-    //   "Content-Type": "application/json"
-    // }
-    //     const options = {
-    //     headers: headers
-    // }
-      
-    // const url = `https://foodie.bymoen.codes/api/menu?restaurant_id=${restaurant_id}`
-
-    // //console.log(restaurant_id)
-
-    // axios.get(url,options).then(this.menuSuccess).catch(this.menuFailure)
-    // },
-
-
-    // menuSuccess(response) {
-    //   //console.log("Menu SUCCESS", response)
-    //   const menu=response.data
-    //   this.menu=menu
-    
-    // },
-    // menuFailure(response) {
-    //   //console.log("Menu FAILURE", response)
-    // },
-
-    // addToCart(item) {
-      
-    //   this.cart.push(item)
-      
-    //   VueCookies.set("cart", JSON.stringify(this.cart))
-    //   const cookies = this.$cookies.get("cart")
-    //   console.log(cookies)
-    // },
-
 
   },
 

@@ -14,6 +14,8 @@ import DeletePatient from '../views/DeletePatient.vue'
 import DeleteDoctor from '../views/DeleteDoctor.vue'
 import EditPatient from '../views/EditPatient.vue'
 import EditDoctor from '../views/EditDoctor.vue'
+import Appointment from '../views/Appointment.vue'
+
 
 
 
@@ -97,6 +99,12 @@ const routes = [
     path: '/edit_doctor',
     name: 'edit_doctor',
     component: EditDoctor
+  },
+
+  {
+    path: '/appointment',
+    name: 'appointment',
+    component: Appointment
   },
 
 

@@ -35,6 +35,9 @@
           </router-link>
       </nav>
       </span>
+      <div>
+        <button @click="logout">Logout</button>
+      </div>
   </div>
 
 </template>
@@ -59,7 +62,7 @@ export default {
 methods: {
   getDoctor() {
     const doctor_id = VueCookies.get("doctor_id")
-    const token = VueCookies.get("token")
+    const token = VueCookies.get("doctor_token")
     console.log(doctor_id)
 
     const headers = {
@@ -84,8 +87,34 @@ methods: {
      
     failure(response) {
       //console.log("FAILURE", response)
+    },
+
+  logout() {
+
+  const token = VueCookies.get("doctor_token")
+
+  const headers = {
+
+  "Content-Type": "application/json",
+  "token": token
     }
+  const url = `http://localhost:5000/api/doctor-login`
+
+  axios.delete(url, {headers: headers}).then(this.logoutSuccess).catch(this.logoutFailure)
   },
+
+    logoutSuccess(response) {
+      if (response.status === 200) {
+        // VueCookies.delete(token)
+        // VueCookies.delete(doctor_id)
+        this.$router.push('/')
+          }
+      },
+     
+     logoutFailure(response) {
+      //console.log("FAILURE", response)
+    },
+},
 
   created() {
     this.getDoctor()

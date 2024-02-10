@@ -29,6 +29,9 @@
           </router-link>
       </nav>
       </span>
+      <div>
+        <button @click="logout">Logout</button>
+      </div>
   </div>
 
 </template>
@@ -78,7 +81,36 @@ methods: {
      
     failure(response) {
       //console.log("FAILURE", response)
-    }
+    },
+
+
+
+    logout() {
+
+const token = VueCookies.get("patient_token")
+
+const headers = {
+
+"Content-Type": "application/json",
+"token": token
+  }
+const url = `http://localhost:5000/api/patient-login`
+
+axios.delete(url, {headers: headers}).then(this.logoutSuccess).catch(this.logoutFailure)
+},
+
+  logoutSuccess(response) {
+    if (response.status === 200) {
+      // VueCookies.delete(token)
+      // VueCookies.delete(doctor_id)
+      this.$router.push('/')
+        }
+    },
+   
+   logoutFailure(response) {
+    //console.log("FAILURE", response)
+    },
+
   },
 
   created() {
