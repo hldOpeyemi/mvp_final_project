@@ -113,40 +113,7 @@ export default {
       console.log("Patch FAILURE", response)
     },
 
-    // deleteDish() {
-    //   // DO THE AXIOS DELETE with the this.dash
-
-    //   const token = VueCookies.get("token")
-
-    //   const headers = {
-    //     "x-api-key": "xldxOub6XfltqnJDAbVl",
-    //     "Content-Type": "application/json",
-    //     "token": token
-    //   }
-
-    //   const body = {
-    //     "menu_id": this.dish.id
-    //   }
-
-    //   const options = {
-    //     headers: headers
-    //   }
-
-    //   const url = `https://foodie.bymoen.codes/api/menu`
-
-    //   axios.delete(url, body, options).then(this.dishSuccess).catch(this.dishFailure)
-    // },
-
-    // dishSuccess(response) {
-    //   console.log("dish SUCCESS", response)
-    // },
-
-    // dishFailureFailure(response) {
-    //   console.log("dish FAILURE", response)
-    // },
-
-
-    getMenu: function (restaurant_id) {
+     getMenu: function (restaurant_id) {
       console.log("GETTING MENU")
 
       const headers = {

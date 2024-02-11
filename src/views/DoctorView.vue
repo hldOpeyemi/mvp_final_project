@@ -36,7 +36,8 @@
     </router-link>
     
     </div>
-    <div class="about">
+    <div id="appointment">
+      <appointment></appointment>
         
     </div> 
   
@@ -51,12 +52,14 @@
 <script>
 import axios from 'axios';
 import VueCookies from 'vue-cookies';
+import appointment from ".//Appointment.vue"
 
 
 export default {
   name: 'DoctorView',
   components: { 
    // HelloWorld
+    "appointment": appointment
   },
   
   data: function() {
